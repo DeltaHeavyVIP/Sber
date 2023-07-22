@@ -7,7 +7,9 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class Main {
     public static void main(String[] args) throws FileNotFoundException {
@@ -46,9 +48,16 @@ public class Main {
                 idMaxPopulation = city.getId();
             }
         }
-        System.out.println("[" + idMaxPopulation + "] = " + maxPopulation);
+        System.out.println("[" + idMaxPopulation + "] = " + maxPopulation + "\n");
 
-
+        // Поиск количества городов в разрезе регионов
+        stringBuilder.setLength(0);
+        Map<String, Long> result = cities.stream().collect(Collectors.groupingBy(City::getRegion,
+                Collectors.counting()));
+        for (Map.Entry<String, Long> entry : result.entrySet()) {
+            stringBuilder.append(entry.getKey()).append(" - ").append(entry.getValue()).append("\n");
+        }
+        System.out.println(stringBuilder);
 
     }
 }
