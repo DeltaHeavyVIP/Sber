@@ -37,5 +37,18 @@ public class Main {
         }
         System.out.println(stringBuilder);
 
+        // Поиск города с наибольшим числом жителей
+        int maxPopulation = -1;
+        int idMaxPopulation = -1;
+        for (City city : cities) {
+            if (city.getPopulation() > maxPopulation) {
+                maxPopulation = city.getPopulation();
+                idMaxPopulation = city.getId();
+            }
+        }
+        System.out.println("[" + idMaxPopulation + "] = " + maxPopulation);
+
+
+
     }
 }
